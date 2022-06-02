@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    <script src="https://unpkg.com/prop-types@15.8.1/prop-types.js"></script>
+    <script type="text/babel">
+        const rootElement = document.getElementById('root')
+
+        function User(){
+            const [pass, setPass] = React.useState('')
+            const handelChangeP = event => setPass(event.target.value)
+            const [name, setName] = React.useState('')
+            const handelChangeU = event => setName(event.target.value)
+                
+            return(
+                <>
+                { name? <p>Hola, {name}</p> : 'ingrese su nombre'}
+                    <div style = {{display: "flex",flexDirection: "column", while: "40%"}}>
+                        <form>
+                         <input type="text" onChange={handelChangeU} value={name}/>
+                        </form>
+                { pass? <p>Contraseña:</p> : 'ingrese su contraseña'}
+                        <form>
+                         <input  type="password" onChange={handelChangeP} value={pass}/>
+                        </form>
+                        {pass.length !== 0 && (<p style = { {color: pass.length>= 8? 'green' : 'red'}}>{pass.length>=8 ? "Su contraseña es segura" : "La contraseña tiene que tener 8 caracteres"}</p>)}
+
+                    </div>
+                
+                </>
+            )
+          
+        }
+
+        ReactDOM.render(<User/>, rootElement)
+    </script>
+</body>
+</html>
